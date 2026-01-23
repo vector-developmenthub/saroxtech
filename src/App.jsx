@@ -1,17 +1,26 @@
-import { useState } from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Tools from "./pages/Tools";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Portfolio from "./pages/Portfolio";
+import "./App.css";
 
 export default function App() {
-  const [page, setPage] = useState("home")
-
   return (
-    <>
-      <nav>
-        <button onClick={() => setPage("home")}>Home</button>
-        <button onClick={() => setPage("about")}>About</button>
-      </nav>
-
-      {page === "home" && <h1>Welcome</h1>}
-      {page === "about" && <h1>About</h1>}
-    </>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/tools" element={<Tools />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <footer className="app-footer">
+        <p>&copy; 2024 SaroX Tech. All rights reserved.</p>
+      </footer>
+    </Router>
+  );
 }
