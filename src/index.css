@@ -1,55 +1,178 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: #333;
-  background-color: #f5f5f5;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bg: #02040a;
+  --accent: #4ade80;
+  --accent-soft: #22c55e33;
+  --accent-alt: #22d3ee;
+  --text-main: #e5e7eb;
+  --text-muted: #6b7280;
+  --card-bg: #020617;
+  --border-subtle: #1f2933;
 }
 
-a {
-  font-weight: 500;
-  color: #667eea;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #764ba2;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+  background: radial-gradient(circle at top, #020617 0, #02040a 40%, #000 100%);
+  color: var(--text-main);
+}
+
+a {
+  color: inherit;
+}
+
+.app-root {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+
+/* Timeline: desktop layout */
+@media (min-width: 720px) {
+  .timeline-root {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 24px;
+  }
+
+  .timeline-item > div:first-child {
+    /* dot column centrā */
+    align-items: center;
+  }
+
+  .timeline-item article {
+    max-width: 480px;
+  }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #667eea;
-  color: white;
-  cursor: pointer;
-  transition: all 0.25s;
+/* Mobile: line left, cards right */
+@media (max-width: 719px) {
+  .timeline-root {
+    padding-left: 8px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
 }
-button:hover {
-  background-color: #764ba2;
-  transform: translateY(-2px);
+
+/* Pievieno index.css beigās */
+.project-card-link {
+  transition: all 200ms ease-out !important;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.project-card-link:hover:not(.no-link) {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(34, 197, 94, 0.3) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+.project-card-link.no-link:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+/* src/index.css - PIEVIENO BEIGĀS */
+.content-container {
+  isolation: isolate; /* izveido jaunu stacking context */
+  position: relative;
+}
+
+/* Blur visiem caurspīdīgajiem/background elementiem */
+.backdrop-blur {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Specifiski cards un glass efektiem */
+.glass-card,
+.project-card-link {
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+}
+
+/* Summary box */
+.summary-section {
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+
+
+
+
+/* Timeline items base state */
+.timeline-curvy-item {
+  transform-origin: center center;
+  transform: scale(0.92);
+  opacity: 0.55;
+  filter: blur(1px);
+  transition: transform 220ms ease-out, opacity 220ms ease-out,
+    filter 220ms ease-out, box-shadow 220ms ease-out;
+}
+
+/* Active card (centrā, fokusā) */
+.timeline-curvy-item.is-active {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.85);
+}
+
+.timeline-curvy-item.is-active .timeline-curvy-card {
+  border-color: #1f2937;
+}
+
+/* Mobile layout */
+@media (max-width: 719px) {
+  .timeline-curvy-root {
+    padding-left: 8px;
+  }
+
+  .timeline-curvy-item {
+    padding-left: 8px;
+  }
+
+  .timeline-curvy-dot {
+    left: 24px;
+    transform: translateX(-50%);
+  }
+
+  .timeline-curvy-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Desktop layout */
+@media (min-width: 720px) {
+  .timeline-curvy-root {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .timeline-curvy-list {
+    gap: 36px;
+  }
+
+  .timeline-curvy-card {
+    margin: 0 auto;
+    max-width: 640px;
+  }
 }
