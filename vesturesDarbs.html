@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="lv" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renesanse - Jaunais Laikmets!</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&amp;family=Cinzel:wght@400;700;900&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 5px #fbbf24); }
+      50% { filter: drop-shadow(0 0 20px #f59e0b); }
+    }
+    @keyframes scroll-reveal {
+      0% { transform: scaleY(0); opacity: 0; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+    @keyframes quill-write {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes bounce-in {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .glow-animation { animation: glow 2s ease-in-out infinite; }
+    .scroll-reveal { animation: scroll-reveal 0.8s ease-out forwards; transform-origin: top; }
+    .sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+    .bounce-in { animation: bounce-in 0.6s ease-out forwards; }
+    
+    .parchment-bg {
+      background: linear-gradient(135deg, #f5e6c8 0%, #e8d4a8 25%, #f0debb 50%, #e5cfa0 75%, #f2e2c4 100%);
+    }
+    .medieval-border {
+      border: 8px solid #8b4513;
+      border-image: repeating-linear-gradient(45deg, #8b4513, #8b4513 10px, #654321 10px, #654321 20px) 8;
+    }
+    .wax-seal {
+      background: radial-gradient(circle at 30% 30%, #dc2626 0%, #991b1b 50%, #7f1d1d 100%);
+      box-shadow: inset -2px -2px 6px rgba(0,0,0,0.4), 2px 2px 8px rgba(0,0,0,0.3);
+    }
+    .gothic-text {
+      font-family: 'UnifrakturMaguntia', cursive;
+    }
+    .renaissance-text {
+      font-family: 'Cinzel', serif;
+    }
+    .elegant-text {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .comparison-card {
+      transition: all 0.3s ease;
+    }
+    .comparison-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .ribbon {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+    }
+    .ribbon::before {
+      content: "JAUNS!";
+      position: absolute;
+      top: 20px;
+      right: -25px;
+      width: 120px;
+      padding: 5px 0;
+      background: #dc2626;
+      color: white;
+      text-align: center;
+      transform: rotate(45deg);
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      font-size: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-container" class="h-full w-full parchment-bg overflow-auto"><!-- Galvenais saturs -->
+   <div class="min-h-full p-4 md:p-8"><!-- Virsraksts ar dekoratīvu rāmi -->
+    <header class="text-center mb-8 relative">
+     <div class="inline-block relative"><!-- Dekoratīvs rāmis -->
+      <div class="absolute -top-4 -left-4 w-8 h-8 border-t-4 border-l-4 border-amber-800"></div>
+      <div class="absolute -top-4 -right-4 w-8 h-8 border-t-4 border-r-4 border-amber-800"></div>
+      <div class="absolute -bottom-4 -left-4 w-8 h-8 border-b-4 border-l-4 border-amber-800"></div>
+      <div class="absolute -bottom-4 -right-4 w-8 h-8 border-b-4 border-r-4 border-amber-800"></div>
+      <div class="px-8 py-4">
+       <p class="text-amber-700 text-sm tracking-widest mb-2 renaissance-text">⚜️ SVARĪGS PAZIŅOJUMS VISIEM ZEMNIEKIEM, MUIŽNIEKIEM UN PĀRĒJIEM VIDUSLAIKU CILVĒKIEM  ⚜️</p>
+       <h1 id="main-title" class="text-4xl md:text-6xl text-amber-900 renaissance-text font-bold mb-2 glow-animation">RENESANSE</h1>
+       <p id="subtitle" class="text-xl md:text-2xl text-amber-800 elegant-text italic">Jaunie Laiki Ir Klāt!</p>
+       <p id="subtitle" class="text-xl md:text-2xl text-amber-800 elegant-text italic">Gustavs Rumba, Uldis Fogelis un Valters Šaroks</p>
+      </div>
+     </div>
+    </header><!-- Galvenais salīdzinājums -->
+    <div class="max-w-5xl mx-auto mb-8">
+     <div class="grid md:grid-cols-2 gap-6"><!-- Viduslaiki - sliktais -->
+      <div class="comparison-card bg-stone-700 rounded-lg p-6 text-stone-200 relative overflow-hidden shadow-xl">
+       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-stone-800 via-stone-600 to-stone-800"></div>
+       <div class="text-center mb-4"><span class="text-5xl">😰</span>
+        <h2 class="text-2xl gothic-text text-stone-300 mt-2">Viduslaiki</h2>
+        <p class="text-red-400 text-sm">❌ NOVECOJIS MODELIS</p>
+       </div>
+       <ul class="space-y-3 text-sm">
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Mēris</strong> katru otrdienu</span></li>
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Dzīves ilgums:</strong> ~30 gadi (ja paveicas)</span></li>
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Izglītība:</strong> "Zeme ir plakana, un tas ir galīgais vārds"</span></li>
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Māksla:</strong> Visi izskatās bēdīgi un skumji</span></li>
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Higiēna:</strong> Vanna reizi gadā (ja karalis pavēl)</span></li>
+        <li class="flex items-start gap-2"><span class="text-red-400 text-lg">✗</span> <span><strong>Karjeras iespējas:</strong> Zemnieks → Zemnieks</span></li>
+       </ul>
+       <div class="mt-4 p-3 bg-stone-800 rounded text-center">
+        <p class="text-stone-400 text-xs gothic-text">"Ciešanas veido raksturu"</p>
+        <p class="text-stone-500 text-xs">— Kāds lords, pirms mēra</p>
+       </div>
+      </div><!-- Renesanse - labais -->
+      <div class="comparison-card bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg p-6 text-amber-900 relative overflow-hidden shadow-xl border-2 border-amber-400">
+       <div class="ribbon"></div>
+       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400"></div><!-- Mirdzošas zvaigznītes -->
+       <div class="absolute top-4 left-4 w-2 h-2 bg-yellow-400 rounded-full sparkle"></div>
+       <div class="absolute top-12 right-8 w-2 h-2 bg-yellow-400 rounded-full sparkle" style="animation-delay: 0.5s;"></div>
+       <div class="absolute bottom-20 left-8 w-2 h-2 bg-yellow-400 rounded-full sparkle" style="animation-delay: 1s;"></div>
+       <div class="text-center mb-4"><span class="text-5xl float-animation inline-block">🎨</span>
+        <h2 class="text-2xl renaissance-text text-amber-800 mt-2 font-bold">Renesanse</h2>
+        <p class="text-green-600 text-sm font-semibold">✨ PREMIUM LAIKMETS</p>
+       </div>
+       <ul class="space-y-3 text-sm">
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Mazāk mēra!</strong> Tagad ar roku mazgāšanu!</span></li>
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Dzīves ilgums:</strong> Pat līdz 50 gadiem! 🎉</span></li>
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Izglītība:</strong> "Varbūt Zeme ir... apaļa?" 🌍</span></li>
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Māksla:</strong> Cilvēki izskatās kā cilvēki! Ar emocijām!</span></li>
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Higiēna:</strong> Smaržas! Ziepes!</span></li>
+        <li class="flex items-start gap-2"><span class="text-green-600 text-lg">✓</span> <span><strong>Karjeras iespējas:</strong> Mākslinieks, zinātnieks, izgudrotājs!</span></li>
+       </ul>
+       <div class="mt-4 p-3 bg-amber-200 rounded text-center border border-amber-300">
+        <p class="text-amber-800 text-xs renaissance-text font-bold">"Cilvēks ir visuma centrs!"</p>
+        <p class="text-amber-600 text-xs">— Leonardo da Vinči (viņš māk lasīt!)</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Bonusa piedāvājumi -->
+    <div class="max-w-4xl mx-auto mb-8">
+     <div class="bg-gradient-to-r from-red-800 via-red-700 to-red-800 rounded-lg p-6 text-white shadow-xl relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+       <div class="absolute top-0 left-0 w-32 h-32 border-2 border-white rounded-full -translate-x-16 -translate-y-16"></div>
+       <div class="absolute bottom-0 right-0 w-48 h-48 border-2 border-white rounded-full translate-x-24 translate-y-24"></div>
+      </div>
+      <div class="relative z-10">
+       <h3 class="text-center text-2xl renaissance-text font-bold mb-4">🎁 ĪPAŠAIS PIEDĀVĀJUMS! 🎁</h3>
+       <p class="text-center text-yellow-200 mb-4 elegant-text italic">Pievienojies Renesansei TAGAD un saņem:</p>
+       <div class="grid md:grid-cols-3 gap-4 text-center">
+        <div class="bg-white/10 rounded-lg p-4 backdrop-blur"><span class="text-3xl block mb-2">📚</span>
+         <p class="text-sm font-semibold">BEZMAKSAS grāmata</p>
+         <p class="text-xs text-red-200">(tagad ar Gutenberga presi!)</p>
+        </div>
+        <div class="bg-white/10 rounded-lg p-4 backdrop-blur"><span class="text-3xl block mb-2">🎭</span>
+         <p class="text-sm font-semibold">Teātra biļete</p>
+         <p class="text-xs text-red-200">(Šekspīrs gaidāms drīzumā!)</p>
+        </div>
+        <div class="bg-white/10 rounded-lg p-4 backdrop-blur"><span class="text-3xl block mb-2">🔭</span>
+         <p class="text-sm font-semibold">Teleskopa izmēģinājums</p>
+         <p class="text-xs text-red-200">(redzēsi Mēnesi tuvu!)</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Atsauksmes -->
+    <div class="max-w-4xl mx-auto mb-8">
+     <h3 class="text-center text-xl renaissance-text text-amber-800 mb-4 font-bold">📜 ATSAUKSMES NO APMIERINĀTIEM PILSOŅIEM 📜</h3>
+     <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-white/60 rounded-lg p-4 shadow-md border border-amber-200">
+       <div class="flex items-center gap-2 mb-2"><span class="text-2xl">👨‍🌾</span>
+        <div>
+         <p class="font-bold text-amber-900 elegant-text">Marco no Toskānas</p>
+         <p class="text-amber-600 text-xs">★★★★★ Bijušais zemnieks</p>
+        </div>
+       </div>
+       <p class="text-amber-800 text-sm italic elegant-text">"Tagad varu lasīt! Un mans lords teica, ka esmu 'vērtīgs darbaspēks'! Iepriekš biju tikai 'darbaspēks'!"</p>
+      </div>
+      <div class="bg-white/60 rounded-lg p-4 shadow-md border border-amber-200">
+       <div class="flex items-center gap-2 mb-2"><span class="text-2xl">👸</span>
+        <div>
+         <p class="font-bold text-amber-900 elegant-text">Marija no Florences</p>
+         <p class="text-amber-600 text-xs">★★★★★ Muižniece</p>
+        </div>
+       </div>
+       <p class="text-amber-800 text-sm italic elegant-text">"Beidzot portretos izskatos skaista, nevis kā skumja kartupeļu maiss! Paldies, Renesanse!"</p>
+      </div>
+     </div>
+    </div><!-- Aicinājums uz darbību -->
+    <div class="max-w-2xl mx-auto text-center mb-8">
+     <div class="bg-gradient-to-br from-amber-200 to-orange-200 rounded-xl p-8 shadow-xl border-4 border-amber-500 relative"><!-- Vaska zīmogs -->
+      <div class="absolute -bottom-6 -right-6 w-20 h-20 wax-seal rounded-full flex items-center justify-center text-white font-bold text-xs renaissance-text transform rotate-12 shadow-lg"><span class="transform -rotate-12">APSTIPRINĀTS</span>
+      </div>
+      <h3 class="text-2xl md:text-3xl renaissance-text text-amber-900 font-bold mb-4">🌟 NEPALAID GARĀM! 🌟</h3>
+      <p class="text-amber-800 elegant-text mb-6">Viduslaiki ir <strong>PAGĀTNE</strong>. Renesanse ir <strong>NĀKOTNE</strong>.<br><span class="text-sm">(Un nākotne smaržo labāk!)</span></p><button id="join-btn" class="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white px-8 py-4 rounded-full text-xl renaissance-text font-bold shadow-lg transform transition-all hover:scale-105 active:scale-95"> ⚔️ PIEVIENOTIES RENESANSEI ⚔️ </button>
+      <p class="text-amber-600 text-xs mt-4">* Inkvizīcija var piemērot papildu nosacījumus</p>
+     </div>
+    </div><!-- Kājene -->
+    <footer class="text-center text-amber-700 text-xs pb-4">
+     <p class="renaissance-text">☙ Anno Domini MCDLIII ❧</p>
+     <p class="elegant-text italic mt-1">"Sapere aude" — Uzdrošinies zināt!</p>
+     <p class="mt-2 text-amber-500">Šis paziņojums apstiprināts ar Mediči ģimenes zīmogu</p>
+    </footer>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "RENESANSE",
+      subtitle: "Jaunie Laiki Ir Klāt!",
+      background_color: "#f5e6c8",
+      accent_color: "#92400e",
+      text_color: "#78350f",
+      button_color: "#d97706",
+      card_color: "#fef3c7",
+      font_family: "Cinzel",
+      font_size: 16
+    };
+
+    let config = { ...defaultConfig };
+
+    function applyConfig(cfg) {
+      // Atjaunināt virsrakstus
+      document.getElementById('main-title').textContent = cfg.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = cfg.subtitle || defaultConfig.subtitle;
+      
+      // Atjaunināt krāsas
+      const container = document.getElementById('app-container');
+      const bgColor = cfg.background_color || defaultConfig.background_color;
+      container.style.background = linear-gradient(135deg, ${bgColor} 0%, ${adjustColor(bgColor, -10)} 50%, ${bgColor} 100%);
+      
+      // Atjaunināt pogas krāsu
+      const btn = document.getElementById('join-btn');
+      const btnColor = cfg.button_color || defaultConfig.button_color;
+      btn.style.background = linear-gradient(to right, ${btnColor}, ${adjustColor(btnColor, 20)});
+      
+      // Atjaunināt fontu
+      const fontFamily = cfg.font_family || defaultConfig.font_family;
+      document.querySelectorAll('.renaissance-text').forEach(el => {
+        el.style.fontFamily = ${fontFamily}, Cinzel, serif;
+      });
+      
+      // Atjaunināt fonta izmēru
+      const fontSize = cfg.font_size || defaultConfig.font_size;
+      document.documentElement.style.fontSize = ${fontSize}px;
+    }
+
+    function adjustColor(hex, amount) {
+      const num = parseInt(hex.replace('#', ''), 16);
+      const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+      const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
+      const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
+      return #${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)};
+    }
+
+    // Pogas klikšķa apstrāde
+    document.getElementById('join-btn').addEventListener('click', function() {
+      this.innerHTML = '🎉 LAIPNI LŪGTI RENESANSĒ! 🎉';
+      this.classList.add('bounce-in');
+      
+      // Konfeti efekts
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.innerHTML = ['✨', '🌟', '⭐', '💫', '🎨', '📚', '🎭'][Math.floor(Math.random() * 7)];
+          confetti.style.cssText = `
+            position: fixed;
+            top: -20px;
+            left: ${Math.random() * 100}%;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: fall 3s linear forwards;
+          `;
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 100);
+      }
+      
+      // Pievienot kritienas animāciju
+      if (!document.getElementById('confetti-style')) {
+        const style = document.createElement('style');
+        style.id = 'confetti-style';
+        style.textContent = `
+          @keyframes fall {
+            to {
+              transform: translateY(100vh) rotate(720deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+
+    // Inicializēt Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (cfg) => {
+          config = { ...config, ...cfg };
+          applyConfig(config);
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.card_color || defaultConfig.card_color,
+              set: (value) => {
+                cfg.card_color = value;
+                window.elementSdk.setConfig({ card_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.button_color || defaultConfig.button_color,
+              set: (value) => {
+                cfg.button_color = value;
+                window.elementSdk.setConfig({ button_color: value });
+              }
+            },
+            {
+              get: () => cfg.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                cfg.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => cfg.font_family || defaultConfig.font_family,
+            set: (value) => {
+              cfg.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => cfg.font_size || defaultConfig.font_size,
+            set: (value) => {
+              cfg.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ["main_title", cfg.main_title || defaultConfig.main_title],
+          ["subtitle", cfg.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+
+    // Sākotnējā konfigurācija
+    applyConfig(config);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ced2b448618e4e1',t:'MTc3MTI0NjIwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
